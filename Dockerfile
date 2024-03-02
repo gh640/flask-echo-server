@@ -14,10 +14,8 @@ WORKDIR /tmp
 
 RUN python -m pip install -U pip
 
-ARG POETRY_VERSION="1.1.14"
-# 公式の https://install.python-poetry.org は invalid not-modified ETag エラーで
-# アクセスできないことがあるためこちらの URL を使う
-ARG POETRY_URL="https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py"
+ARG POETRY_VERSION="1.8.1"
+ARG POETRY_URL="https://install.python-poetry.org"
 
 ADD "${POETRY_URL}" ./install-poetry.py
 RUN python /tmp/install-poetry.py --version "${POETRY_VERSION}"
