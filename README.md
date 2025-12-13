@@ -2,6 +2,11 @@
 
 Python Flask ベースのエコーサーバーです。
 
+## 動作要件
+
+- Python 3.14
+- uv `0.9.x`
+
 ## 使い方
 
 - A) ホストマシンで使う
@@ -27,7 +32,7 @@ Docker イメージをビルドします。
 
 ```zsh
 image_name=$(basename $(pwd))
-docker build -t $image_name .
+docker build -t $image_name --build-arg PYTHON_VERSION=3.14 .
 ```
 
 Docker コンテナを起動します。
