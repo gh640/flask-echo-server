@@ -12,13 +12,13 @@ Python Flask ベースのエコーサーバーです。
 パッケージをインストールします。
 
 ```zsh
-poetry install
+uv sync
 ```
 
 サーバーを起動します。
 
 ```zsh
-poetry run flask --app echo run --port 8080
+uv run flask --app echo run --port 8080
 ```
 
 ### B) Docker 上で使う
@@ -33,7 +33,7 @@ docker build -t $image_name .
 Docker コンテナを起動します。
 
 ```zsh
-docker run --rm -it -p 5000:8080 $image_name
+docker run --rm -it -p 8080:8080 $image_name
 ```
 
 A) B) どちらの場合も `localhost:8080` でサーバーが待機します。

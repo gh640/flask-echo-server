@@ -5,26 +5,17 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
   PYTHONUTF8=1 \
   PYTHONIOENCODING="UTF-8" \
   PIP_NO_CACHE_DIR=off \
-  PIP_DISABLE_PIP_VERSION_CHECK=on \
-  POETRY_NO_INTERACTION=1 \
-  POETRY_VIRTUALENVS_CREATE=false \
-  PATH="/root/.local/bin:${PATH}"
+  PIP_DISABLE_PIP_VERSION_CHECK=on
 
 WORKDIR /tmp
 
-RUN python -m pip install -U pip
-
-ARG POETRY_VERSION="1.8.1"
-ARG POETRY_URL="https://install.python-poetry.org"
-
-ADD "${POETRY_URL}" ./install-poetry.py
-RUN python /tmp/install-poetry.py --version "${POETRY_VERSION}"
+RUN python -m pip install -U pip uv
 
 WORKDIR /app
 
-COPY ./pyproject.toml ./
-RUN poetry install
+COPY ./pyproject.toml ./uv.lock ./
+RUN uv sync --frozen
 
 COPY ./echo.py ./
 
-CMD ["flask", "--app", "echo", "--debug", "run", "--host=0.0.0.0"]
+CMD ["uv", "run", "flask", "--app", "echo", "--debug", "run", "--host=0.0.0.0", "--port", "8080"]
