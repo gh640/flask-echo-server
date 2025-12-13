@@ -18,7 +18,7 @@ poetry install
 サーバーを起動します。
 
 ```zsh
-poetry run flask --app echo run
+poetry run flask --app echo run --port 8080
 ```
 
 ### B) Docker 上で使う
@@ -33,7 +33,7 @@ docker build -t $image_name .
 Docker コンテナを起動します。
 
 ```zsh
-docker run --rm -it -p 5000:5000 $image_name
+docker run --rm -it -p 5000:8080 $image_name
 ```
 
-A) B) どちらの場合も `localhost:5000` でサーバーが待機します。
+A) B) どちらの場合も `localhost:8080` でサーバーが待機します。
